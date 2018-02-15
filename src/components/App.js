@@ -42,16 +42,14 @@ class App extends Component {
 
   componentDidMount() {
     const messagesRef = firebase.database().ref('messages');
-    messagesRef.on('value', (snapshot) => {
-      console.log('getting an update', snapshot.val());
-      // this.setState({
-        // messages: snapshot.val()
-      // })
-    });
-  }
+    messagesRef.on('child_added', (snapshot) => {
+      let newMessage = snapshot.val();
 
-  componentDidUpdate() {
-    console.log('component updated', this.state);
+      console.log('getting an update', snapshot.val());
+      this.setState({
+        messages: [...this.state.messages, newMessage]
+      })
+    });
   }
 
   render() {

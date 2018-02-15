@@ -25,7 +25,7 @@ class MessageInput extends Component {
     this.props.sendMessage({
       user: this.props.user,
       message: this.state.message,
-      id: this.props.user + this.state.messageId
+      id: this.props.user + (new Date()).getTime()
     });
 
     this.setState({
